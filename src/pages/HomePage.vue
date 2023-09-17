@@ -1,7 +1,8 @@
 <script setup>
 import Navbar from '../components/NavComponent.vue'
 import BooksDisplay from '../components/BooksDisplay.vue'
-import AddBook from '../components/AddBook.vue'
+import AddBookDesktop from '../components/AddBookDesktop.vue'
+import AddBookMobile from "../components/AddBookMobile.vue"
 </script>
 
 <template>
@@ -9,14 +10,21 @@ import AddBook from '../components/AddBook.vue'
     <h1 class="text-white font-bold text-3xl ml-5">BiblioTrack</h1>
   </header>
   <main class="flex justify-center mt-6">
-    <section class="flex flex-col items-center w-2/3 min-h-[750px]">
+    <section class="flex flex-col items-center w-full lg:min-w-[850px] md:w-5/6 xl:w-2/3 min-h-[800px]">
       <Navbar @openBookForm="toggleBookForm" @handleFilter="toggleFilter" />
       <BooksDisplay
         :books="filterBooks(books)"
         @deleteBook="deleteBook"
         @handleIsRead="handleIsRead"
       />
-      <AddBook
+      <AddBookDesktop
+        v-show="showBookForm"
+        :books="books"
+        @closeBookForm="toggleBookForm"
+        @addNewBook="addBook"
+      />
+      <AddBookMobile
+        :class="showBookForm ? 'animate-slideOutLeft' : 'animate-slideOutLeft'" 
         v-show="showBookForm"
         :books="books"
         @closeBookForm="toggleBookForm"
