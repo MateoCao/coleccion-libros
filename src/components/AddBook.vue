@@ -1,0 +1,80 @@
+<script setup>
+defineProps({
+  books: Array
+})
+</script>
+
+<template>
+  <div
+    class="fixed flex bg-[rgba(0,0,0,0.5)] justify-center items-center w-screen h-screen top-0 right-0"
+  >
+    <div class="flex flex-col relative bottom-16 bg-white rounded w-3/12 gap-5 p-5">
+      <div class="ml-auto">
+        <span class="cursor-pointer" @click="closeForm">
+          <font-awesome-icon :icon="['fas', 'xmark']" />
+        </span>
+      </div>
+      <div class="w-11/12">
+        <form class="flex flex-col w-full gap-3" @submit.prevent="submitForm">
+          <label class="text-lg" for="title">Titulo</label>
+          <input
+            class="border-b-[#232323] focus:border-b-[#2e4f88] duration-300 border-b-2 outline-none p-1"
+            type="text"
+            placeholder="Veinte mil leguas de viaje submarino"
+            name="title"
+            id="title"
+            v-model="title"
+            required
+          />
+          <label class="mt-3 text-lg" for="author">Autor</label>
+          <input
+            class="border-b-[#232323] focus:border-b-[#2e4f88] duration-300 border-b-2 outline-none p-1"
+            type="text"
+            placeholder="Jules Verne"
+            name="author"
+            id="author"
+            v-model="author"
+            required
+          />
+          <button
+            class="bg-[#232323] hover:bg-black duration-300 rounded text-white font-semibold p-2 w-1/3 self-center"
+            type="submit"
+          >
+            Añadir libro
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: '',
+      author: '',
+      isRead: false
+    }
+  },
+  methods: {
+    submitForm() {
+      const newBook = {
+        id: this.books.length === 0 ? 1 : this.books[this.books.length - 1].id + 1,
+        title: this.title,
+        author: this.author,
+        isRead: this.isRead
+      }
+
+      ;(this.title = ''), (this.author = '')
+
+      this.$emit('addNewBook', newBook)
+      this.$emit('closeBookForm')
+    },
+    closeForm() {
+      this.$emit('closeBookForm')
+      ;(this.title = ''), (this.author = '')
+    }
+  }
+}
+</script>
