@@ -1,35 +1,32 @@
-# libros-coleccion
+# BiblioTrack
 
-This template should help get you started developing with Vue 3 in Vite.
+### Descripción
 
-## Recommended IDE Setup
+Es un gestor de Colección de Libros.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Funcionalidades:
+- Añadir un libro.
+- Marcar un libro como leído.
+- Eliminar un libro.
+- Persistencia local de libros en localStorage.
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Tecnologías
 
-## Project Setup
+Vue 3, Vue CLI.
 
+### Instalación
+1. Clona este repositorio.
+```sh
+git clone https://github.com/MateoCao/coleccion-libros
+```
+2. Inicia una terminal en el directorio del proyecto.
+3. Ejecuta npm install para instalar las dependencias 
 ```sh
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
+4. Ejecuta el comando npm run dev para iniciar la aplicación en un servidor de desarrollo.
 ```sh
 npm run dev
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+5. Abre el proyecto desde la url proporcionada en la consola.
