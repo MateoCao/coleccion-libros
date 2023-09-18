@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-  <li :class="this.book.isRead ? 'bg-[#7bc58b]' : 'bg-white'" class="min-h-[125px] h-auto rounded flex gap-3 sm:gap-0">
+  <li :class="book.isRead ? 'bg-[#7bc58b]' : 'bg-white'" class="min-h-[125px] h-auto rounded flex gap-3 sm:gap-0">
     <div class="basis-2/12 min-w-[150px]">
       <div class="mx-auto w-4/6 h-full p-1">
         <img class="h-full w-full rounded" src="../assets/books/mybook.png" alt="" />
@@ -20,12 +20,12 @@ defineProps({
         @click="handleIsRead"
         class="h-fit min-h-[35%] rounded text-sm md:text-base text-white font-semibold p-1 sm:w-[150px]"
         :class="
-          this.book.isRead
+          book.isRead
             ? 'bg-[#477ad1] hover:bg-[#3669c0] duration-300'
             : 'bg-[#7bc58b] hover:bg-[#64a575] duration-300'
         "
       >
-        {{ this.book.isRead ? 'Marcar como no leído' : 'Marcar como leído' }}
+        {{ book.isRead ? 'Marcar como no leído' : 'Marcar como leído' }}
       </button>
       <button
         @click="toggleDeleteMessage"
