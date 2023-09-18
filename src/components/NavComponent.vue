@@ -1,5 +1,7 @@
 <template>
-  <nav class="sticky top-0 h-12 w-full flex items-center gap-12 px-2 py-8 border-b-gray-700 border-b-2 bg-[#f0f0f0]">
+  <nav
+    class="sticky top-0 h-12 w-full flex items-center gap-12 px-2 py-8 border-b-gray-700 border-b-2 bg-[#f0f0f0]"
+  >
     <button
       @click="$emit('openBookForm')"
       class="bg-[#232323] hover:bg-black duration-300 rounded text-white font-semibold p-2"

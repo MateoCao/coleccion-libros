@@ -1,5 +1,5 @@
 <script setup>
-import DeleteModal from './DeleteModal.vue';
+import DeleteModal from './DeleteModal.vue'
 defineProps({
   book: Object
 })
@@ -38,13 +38,12 @@ defineProps({
         Eliminar
       </button>
     </div>
-    <DeleteModal 
+    <DeleteModal
       v-show="deleteMessage"
-      @deleteBook = "deleteBook"
-      @toggleDeleteMessage = "toggleDeleteMessage" 
+      @deleteBook="deleteBook"
+      @toggleDeleteMessage="toggleDeleteMessage"
     />
   </li>
-  
 </template>
 
 <script>

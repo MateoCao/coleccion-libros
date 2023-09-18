@@ -70,7 +70,6 @@ export default {
       this.$emit('closeBookForm')
     },
     closeForm() {
-      
       this.$emit('closeBookForm')
       ;(this.title = ''), (this.author = '')
     }
