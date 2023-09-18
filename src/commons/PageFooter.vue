@@ -1,9 +1,9 @@
 <template>
-  <footer class="bg-black min-h-[65px] mt-5 text-white flex justify-center flex-wrap md:justify-between items-center p-2 gap-2">
+  <footer
+    class="bg-black min-h-[65px] mt-5 text-white flex justify-center flex-wrap md:justify-between items-center p-2 gap-2"
+  >
     <div>
-      <p class="text-lg">
-        Copyright © BiblioTrack
-      </p>
+      <p class="text-lg">Copyright © BiblioTrack</p>
     </div>
     <div class="text-2xl md:text-3xl flex gap-8">
       <a href="https://github.com/MateoCao/coleccion-libros">

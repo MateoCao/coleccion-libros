@@ -154,7 +154,6 @@ export default {
     },
 
     toggleFilter(currentFilter) {
-      console.log(currentFilter)
       this.filter = currentFilter
     },
 
