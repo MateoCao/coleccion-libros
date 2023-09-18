@@ -1,14 +1,24 @@
 <script setup>
-import Navbar from '../components/NavComponent.vue'
-import BooksDisplay from '../components/BooksDisplay.vue'
-import AddBookDesktop from '../components/AddBookDesktop.vue'
-import AddBookMobile from '../components/AddBookMobile.vue'
-import PageFooter from '../commons/PageFooter.vue'
+  import Navbar from '../components/NavComponent.vue'
+  import BooksDisplay from '../components/BooksDisplay.vue'
+  import AddBookDesktop from '../components/AddBookDesktop.vue'
+  import AddBookMobile from '../components/AddBookMobile.vue'
+  import PageFooter from '../commons/PageFooter.vue'
+  import localStorageHandler from "../utils/localStorageHandler.js"
+  import MessageModal from "../components/MessageModal.vue"
+  import ScrollToTopButton from "../components/ScrollToTopButton.vue"
 </script>
 
 <template>
   <header class="h-16 bg-black flex items-center">
     <h1 class="text-white font-bold text-3xl ml-5">BiblioTrack</h1>
+    <Transition name="slideMessage">
+      <MessageModal 
+      v-show="showMessage"
+      :message = "message"
+      :messageError = "messageError"
+      />
+    </Transition>
   </header>
   <main class="flex justify-center mt-6">
     <section
@@ -20,24 +30,111 @@ import PageFooter from '../commons/PageFooter.vue'
         @deleteBook="deleteBook"
         @handleIsRead="handleIsRead"
       />
-      <AddBookDesktop
-        :class="showBookForm && 'animate-fadeIn'"
+      <Transition name="fade">
+        <AddBookDesktop
+        v-show="showBookForm"
+        :books="books"
+        @closeBookForm="toggleBookForm"
+        @addNewBook="addBook"
+        />
+      </Transition>
+      
+      <Transition name="slideForm">
+        <AddBookMobile
         v-show="showBookForm"
         :books="books"
         @closeBookForm="toggleBookForm"
         @addNewBook="addBook"
       />
-      <AddBookMobile
-        :class="showBookForm ? 'animate-slideOutLeft' : 'animate-slideOutLeft'"
-        v-show="showBookForm"
-        :books="books"
-        @closeBookForm="toggleBookForm"
-        @addNewBook="addBook"
-      />
+      </Transition>
+      
     </section>
   </main>
+  <ScrollToTopButton />
   <PageFooter />
 </template>
+
+<style>
+  .fade-enter-active {
+    animation: fadeIn 300ms ease-in-out;
+  }
+
+  .fade-leave-active {
+    animation: fadeOut 300ms ease-in-out;
+  }
+
+  .slideForm-enter-active {
+    animation: slideInLeft 400ms ease-in-out;
+  }
+
+  .slideForm-leave-active {
+    animation: slideOutLeft 400ms ease-in-out;
+  }
+
+  .slideMessage-enter-active {
+    animation: slideDown 400ms ease-in-out;
+  }
+
+  .slideMessage-leave-active {
+    animation: slideUp 400ms ease-in-out;
+  }
+
+  @keyframes slideInLeft {
+      100% {
+      transform: translateX(0);
+    }
+      0% {
+        transform: translateX(100vw);
+    }
+  }
+
+  @keyframes slideOutLeft {
+      100% {
+      transform: translateX(100vw);
+    }
+      0% {
+        transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+      0% {
+      opacity: 0;
+    }
+      100% {
+        opacity: 1;
+      }
+  }
+
+  @keyframes fadeOut {
+      0% {
+      opacity: 1;
+    }
+      100% {
+        opacity: 0;
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+        transform: translatey(-38px);
+    }
+
+    to {
+        transform: translatey(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translatey(0);
+    }
+
+    to {
+        transform: translatey(-55px);
+    }
+}
+</style>
 
 <script>
 export default {
@@ -46,7 +143,11 @@ export default {
       books: [],
       filteredBooks: [],
       filter: null,
-      showBookForm: false
+      showBookForm: false,
+      bookFormClass: "",
+      showMessage: false,
+      message: "",
+      messageError: false
     }
   },
   created() {
@@ -54,13 +155,7 @@ export default {
   },
   methods: {
     getBooks() {
-      const booksStorage = localStorage.getItem('books')
-      const savedBooks = JSON.parse(booksStorage)
-      if (savedBooks) {
-        this.books = savedBooks
-      } else {
-        return
-      }
+      this.books = localStorageHandler.getBooks()
     },
 
     toggleFilter(currentFilter) {
@@ -81,16 +176,19 @@ export default {
 
     addBook(newBook) {
       this.books.push(newBook)
-      const booksStorage = JSON.stringify(this.books)
-      localStorage.setItem('books', booksStorage)
+      localStorageHandler.setBooks(this.books)
+      this.openMessage("Libro añadido exitosamente")
     },
 
     deleteBook(id) {
       const index = this.books.findIndex((books) => books.id === id)
       if (index !== -1) {
         this.books.splice(index, 1)
-        const booksStorage = JSON.stringify(this.books)
-        localStorage.setItem('books', booksStorage)
+        localStorageHandler.setBooks(this.books)
+        this.openMessage("Libro eliminado exitosamente")
+      } else {
+        this.messageError = true
+        this.openMessage("Error al eliminar el libro")
       }
     },
 
@@ -98,20 +196,26 @@ export default {
       const index = this.books.findIndex((books) => books.id === id)
       if (index !== -1) {
         this.books[index].isRead = !isRead
-        const booksStorage = JSON.stringify(this.books)
-        localStorage.setItem('books', booksStorage)
+        localStorageHandler.setBooks(this.books)
       }
     },
 
     toggleBookForm() {
       this.showBookForm = !this.showBookForm
-      
-      if (this.showBookForm) {
-        document.documentElement.style.overflow = 'hidden'
-      } else {
+      if (!this.showBookForm) {
         document.documentElement.style.overflow = 'auto'
+      } else {
+        document.documentElement.style.overflow = 'hidden'
       }
-    }
+    },
+    openMessage(content) {
+      this.showMessage = true;
+      this.message = content;
+      setTimeout(() => {
+        this.showMessage = false;
+        this.messageError = false;
+      }, 3500)
+  }
   }
 }
 </script>

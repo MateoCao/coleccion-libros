@@ -1,4 +1,5 @@
 <script setup>
+import DeleteModal from './DeleteModal.vue';
 defineProps({
   book: Object
 })
@@ -21,7 +22,7 @@ defineProps({
     <div class="basis-4/12 flex flex-wrap gap-2 items-center justify-around text-sm p-1">
       <button
         @click="handleIsRead"
-        class="h-fit min-h-[38%] rounded text-sm md:text-base text-white font-semibold p-1 sm:w-[150px]"
+        class="h-fit min-h-[30%] md:min-h-[35%] rounded text-sm md:text-base text-white font-semibold p-1 sm:w-[150px]"
         :class="
           book.isRead
             ? 'bg-[#477ad1] hover:bg-[#3669c0] duration-300'
@@ -32,34 +33,18 @@ defineProps({
       </button>
       <button
         @click="toggleDeleteMessage"
-        class="bg-[#eb7575] hover:bg-[#b95d5d] duration-300 text-sm md:text-base h-fit min-h-[38%] rounded text-white font-semibold p-1"
+        class="bg-[#eb7575] hover:bg-[#b95d5d] duration-300 text-sm md:text-base h-fit min-h-[30%] md:min-h-[35%] sm:w-[90px] rounded text-white font-semibold p-1"
       >
         Eliminar
       </button>
-      <div
-        v-show="deleteMessage"
-        class="fixed flex bg-[rgba(0,0,0,0.5)] justify-center items-center w-screen h-screen top-0 right-0"
-      >
-        <div class="flex flex-col bg-white relative bottom-20 gap-5 p-8 justify-center rounded">
-          <h4 class="text-center text-xl">¿Estás seguro que deseas eliminar el libro?</h4>
-          <div class="flex justify-center gap-3">
-            <button
-              @click="deleteBook"
-              class="bg-[#eb7575] hover:bg-[#b95d5d] duration-300 h-fit min-h-[40%] rounded text-white font-semibold p-2"
-            >
-              Confirmar
-            </button>
-            <button
-              @click="toggleDeleteMessage"
-              class="bg-[#477ad1] hover:bg-[#3669c0] duration-300 h-fit min-h-[40%] rounded text-white font-semibold p-2"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
+    <DeleteModal 
+      v-show="deleteMessage"
+      @deleteBook = "deleteBook"
+      @toggleDeleteMessage = "toggleDeleteMessage" 
+    />
   </li>
+  
 </template>
 
 <script>
@@ -83,7 +68,6 @@ export default {
 
     toggleDeleteMessage() {
       this.deleteMessage = !this.deleteMessage
-      console.log(this.deleteMessage)
       if (this.deleteMessage) {
         document.documentElement.style.overflow = 'hidden'
       } else {

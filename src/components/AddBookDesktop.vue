@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div
-    class="hidden md:flex fixed bg-[rgba(0,0,0,0.5)] justify-center items-center w-screen h-screen top-0 right-0 overflow-hidden"
+    class="hidden md:flex fixed bg-[rgba(0,0,0,0.5)] justify-center items-center w-screen h-screen top-0 right-0"
   >
     <div class="flex flex-col relative bottom-16 bg-white rounded sm:w-[500px] gap-5 p-5">
       <div class="ml-auto">
