@@ -13,7 +13,7 @@ Funcionalidades:
 
 ### Tecnologías
 
-Vue 3, Vue CLI.
+Vue 3, Vue CLI, Tailwind CSS.
 
 ### Instalación
 1. Clona este repositorio.
