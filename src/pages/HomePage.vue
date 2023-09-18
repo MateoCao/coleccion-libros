@@ -2,7 +2,8 @@
 import Navbar from '../components/NavComponent.vue'
 import BooksDisplay from '../components/BooksDisplay.vue'
 import AddBookDesktop from '../components/AddBookDesktop.vue'
-import AddBookMobile from "../components/AddBookMobile.vue"
+import AddBookMobile from '../components/AddBookMobile.vue'
+import PageFooter from '../commons/PageFooter.vue'
 </script>
 
 <template>
@@ -10,7 +11,9 @@ import AddBookMobile from "../components/AddBookMobile.vue"
     <h1 class="text-white font-bold text-3xl ml-5">BiblioTrack</h1>
   </header>
   <main class="flex justify-center mt-6">
-    <section class="flex flex-col items-center w-full lg:min-w-[850px] md:w-5/6 xl:w-2/3 min-h-[800px]">
+    <section
+      class="flex flex-col items-center w-full lg:min-w-[850px] md:w-5/6 xl:w-2/3 min-h-[800px]"
+    >
       <Navbar @openBookForm="toggleBookForm" @handleFilter="toggleFilter" />
       <BooksDisplay
         :books="filterBooks(books)"
@@ -18,13 +21,14 @@ import AddBookMobile from "../components/AddBookMobile.vue"
         @handleIsRead="handleIsRead"
       />
       <AddBookDesktop
+        :class="showBookForm && 'animate-fadeIn'"
         v-show="showBookForm"
         :books="books"
         @closeBookForm="toggleBookForm"
         @addNewBook="addBook"
       />
       <AddBookMobile
-        :class="showBookForm ? 'animate-slideOutLeft' : 'animate-slideOutLeft'" 
+        :class="showBookForm ? 'animate-slideOutLeft' : 'animate-slideOutLeft'"
         v-show="showBookForm"
         :books="books"
         @closeBookForm="toggleBookForm"
@@ -32,7 +36,7 @@ import AddBookMobile from "../components/AddBookMobile.vue"
       />
     </section>
   </main>
-  <footer class="bg-black h-10 mt-5"></footer>
+  <PageFooter />
 </template>
 
 <script>
@@ -101,6 +105,7 @@ export default {
 
     toggleBookForm() {
       this.showBookForm = !this.showBookForm
+      
       if (this.showBookForm) {
         document.documentElement.style.overflow = 'hidden'
       } else {

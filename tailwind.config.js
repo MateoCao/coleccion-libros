@@ -14,11 +14,16 @@ export default {
         slideInLeft: {
           '100%': { transform: 'translateX(100vw)' },
           '100%, 0%': { transform: 'translateX(0)' }
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
         }
       },
       animation: {
         slideOutLeft: 'slideOutLeft 400ms ease-in-out',
-        slideInLeft: 'slideInLeft 400ms ease-in-out'
+        slideInLeft: 'slideInLeft 400ms ease-in-out',
+        fadeIn: 'fadeIn 600ms ease-in-out',
       },
       fontFamily: {
         body: ["Lato"]

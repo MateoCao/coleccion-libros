@@ -5,10 +5,13 @@ defineProps({
 </script>
 
 <template>
-  <li :class="book.isRead ? 'bg-[#7bc58b]' : 'bg-white'" class="min-h-[125px] h-auto rounded flex gap-3 sm:gap-0">
+  <li
+    :class="book.isRead ? 'bg-[#7bc58b]' : 'bg-white'"
+    class="min-h-[125px] h-auto rounded flex gap-3 sm:gap-0"
+  >
     <div class="basis-2/12 min-w-[150px]">
       <div class="mx-auto w-4/6 h-full p-1">
-        <img class="h-full w-full rounded" src="../assets/books/mybook.png" alt="" />
+        <img class="h-full w-full rounded" src="../assets/books/book1.jpg" alt="" />
       </div>
     </div>
     <div class="basis-6/12 flex justify-center flex-col gap-2">
@@ -18,7 +21,7 @@ defineProps({
     <div class="basis-4/12 flex flex-wrap gap-2 items-center justify-around text-sm p-1">
       <button
         @click="handleIsRead"
-        class="h-fit min-h-[35%] rounded text-sm md:text-base text-white font-semibold p-1 sm:w-[150px]"
+        class="h-fit min-h-[38%] rounded text-sm md:text-base text-white font-semibold p-1 sm:w-[150px]"
         :class="
           book.isRead
             ? 'bg-[#477ad1] hover:bg-[#3669c0] duration-300'
@@ -29,7 +32,7 @@ defineProps({
       </button>
       <button
         @click="toggleDeleteMessage"
-        class="bg-[#eb7575] hover:bg-[#b95d5d] duration-300 text-sm md:text-base h-fit min-h-[35%] rounded text-white font-semibold p-1"
+        class="bg-[#eb7575] hover:bg-[#b95d5d] duration-300 text-sm md:text-base h-fit min-h-[38%] rounded text-white font-semibold p-1"
       >
         Eliminar
       </button>
