@@ -21,7 +21,7 @@ Vue 3, Vue CLI, Tailwind CSS.
 git clone https://github.com/MateoCao/coleccion-libros
 ```
 2. Inicia una terminal en el directorio del proyecto.
-3. Ejecuta npm install para instalar las dependencias 
+3. Ejecuta npm install para instalar las dependencias. 
 ```sh
 npm install
 ```
@@ -29,4 +29,4 @@ npm install
 ```sh
 npm run dev
 ```
-5. Abre el proyecto desde la url proporcionada en la consola.
+5. Abre el proyecto desde el navegador usando la url proporcionada en la consola.
