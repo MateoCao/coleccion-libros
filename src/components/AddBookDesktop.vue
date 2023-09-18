@@ -24,6 +24,7 @@ defineProps({
             name="title"
             id="title"
             v-model="title"
+            maxlength="60"
             required
           />
           <label class="mt-3 text-xl" for="author">Autor</label>
@@ -34,6 +35,8 @@ defineProps({
             name="author"
             id="author"
             v-model="author"
+            minlength="3"
+            maxlength="40"
             required
           />
           <button

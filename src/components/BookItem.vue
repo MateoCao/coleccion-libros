@@ -12,7 +12,7 @@ defineProps({
   >
     <div class="basis-2/12 min-w-[150px]">
       <div class="mx-auto w-4/6 h-full p-1">
-        <img class="h-full w-full rounded" src="../assets/books/book1.jpg" alt="" />
+        <img class="h-full w-full rounded" src="../assets/books/book1.jpg" :alt="book.title" />
       </div>
     </div>
     <div class="basis-6/12 flex justify-center flex-col gap-2">
